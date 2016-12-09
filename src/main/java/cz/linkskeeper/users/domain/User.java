@@ -1,5 +1,6 @@
 package cz.linkskeeper.users.domain;
 
+import cz.linkskeeper.links.domain.Link;
 import cz.linkskeeper.users.validators.Username;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +8,10 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -33,5 +36,6 @@ public class User {
 
     private String password;
 
-//    private Set<Link> links;
+    @OneToMany
+    private Set<Link> links;
 }
