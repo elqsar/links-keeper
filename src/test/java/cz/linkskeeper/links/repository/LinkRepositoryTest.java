@@ -2,6 +2,7 @@ package cz.linkskeeper.links.repository;
 
 import cz.linkskeeper.app.LinksKeeperApplication;
 import cz.linkskeeper.links.domain.Link;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,11 @@ public class LinkRepositoryTest {
         link.setUrl("http://example.com");
 
         linkRepository.save(link);
+
+        Link otherLink = linkRepository.findOne(link.getId());
+        Assert.assertEquals(otherLink.getDescription(), link.getDescription());
+        Assert.assertEquals(otherLink.getUrl(), link.getUrl());
+
+        linkRepository.delete(otherLink);
     }
 }

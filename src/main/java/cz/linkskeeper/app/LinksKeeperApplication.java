@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("cz.linkskeeper")
 public class LinksKeeperApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LinksKeeperApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LinksKeeperApplication.class, args);
+    }
 }
