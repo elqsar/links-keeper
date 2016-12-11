@@ -5,12 +5,10 @@ import cz.linkskeeper.users.validators.Username;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,6 +17,7 @@ import java.util.Set;
 public class User {
 
     @Id @GeneratedValue
+    @Column(name = "ID_USER")
     private Long id;
 
     @NotNull
@@ -36,6 +35,6 @@ public class User {
 
     private String password;
 
-    @OneToMany
-    private Set<Link> links;
+    @OneToMany(mappedBy = "user")
+    private Set<Link> links = new HashSet<>();
 }

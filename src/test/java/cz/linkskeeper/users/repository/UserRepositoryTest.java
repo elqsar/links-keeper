@@ -1,6 +1,7 @@
 package cz.linkskeeper.users.repository;
 
 import cz.linkskeeper.app.LinksKeeperApplication;
+import cz.linkskeeper.links.domain.Link;
 import cz.linkskeeper.users.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = {LinksKeeperApplication.class})
+@Transactional
 public class UserRepositoryTest {
 
     @Autowired
@@ -52,9 +57,10 @@ public class UserRepositoryTest {
         Assert.assertEquals(users.get(0).getUserName(), "#smithy");
     }
 
-//    @Test
-//    public void shoulFindByMailAddress() {
-//        User newUser = userRepository.findByEmailAddress(user.getMail());
-//        Assert.assertEquals(newUser.getMail(), user.getMail());
-//    }
+    @Test
+    public void shouldUserHaveLinks() {
+        User user = userRepository.getOne(1L);
+        Set<Link> links = user.getLinks();
+        assertThat(links.size()).isNotEqualTo(0);
+    }
 }
